@@ -1,3 +1,4 @@
+import Banner from "~/components/banner";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,5 +12,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div>Home Page</div>;
+  return (
+    <div className=" mx-auto px-[1.5rem]">
+      <Banner />
+    </div>
+  );
 }
