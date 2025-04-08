@@ -1,19 +1,42 @@
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
 
 export default function NavBar() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  });
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      transition={{
-        type: "spring",
-        stiffness: 40,
-        delay: 0.5,
-        ease: "linear",
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
       }}
-      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.35,
+        ease: "easeInOut",
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      className="sticky top-0 w-full z-40 "
     >
-      <div className="flex justify-between items-center mx-auto p-[1.5rem]">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        transition={{
+          type: "spring",
+          stiffness: 40,
+          delay: 0.5,
+          ease: "linear",
+        }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex justify-between items-center mx-auto p-[1.5rem] bg-transparent "
+      >
         <div>
           <Link to="/">Fahim</Link>
         </div>
@@ -28,7 +51,7 @@ export default function NavBar() {
             Contact Me
           </button>
         </div>
-      </div>
+      </motion.div>
     </motion.nav>
   );
 }
