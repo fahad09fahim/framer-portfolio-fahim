@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
+import { div } from "motion/react-client";
 
 export default function NavBar() {
   const handleHomeClick = () => {
@@ -41,7 +42,13 @@ export default function NavBar() {
         className="flex justify-between items-center mx-auto p-[1.5rem] bg-transparent "
       >
         <div>
-          <FlipLinks to="/">Fahim</FlipLinks>
+          <Link
+            onClick={handleHomeClick}
+            to="/"
+            className="text-3xl  font-gloock"
+          >
+            Fahim
+          </Link>
         </div>
         <div className="flex gap-4 cursor-pointer">
           <FlipLinks onClick={handleHomeClick} to="/">
@@ -69,36 +76,36 @@ type FlipLinksProps = {
 
 const FlipLinks = ({ children, to, onClick }: FlipLinksProps) => {
   return (
-    <motion.Link
+    <motion.div
       initial="initial"
       whileHover="hovered"
-      to={to}
-      onClick={onClick}
       className="relative block overflow-hidden whitespace-nowrap "
     >
-      <motion.div
-        variants={{
-          initial: { y: 0 },
-          hovered: {
-            y: "-100%",
-          },
-        }}
-        transition={{ delay: 0.5 }}
-      >
-        {children}
-      </motion.div>
-      <motion.div
-        className="absolute inset-0"
-        variants={{
-          initial: { y: "100%" },
-          hovered: {
-            y: 0,
-          },
-        }}
-        transition={{ delay: 0.5 }}
-      >
-        {children}
-      </motion.div>
-    </motion.Link>
+      <Link to={to} onClick={onClick}>
+        <motion.div
+          variants={{
+            initial: { y: 0 },
+            hovered: {
+              y: "-100%",
+            },
+          }}
+          transition={{ delay: 0.2, duration: 0.3 }}
+        >
+          {children}
+        </motion.div>
+        <motion.div
+          className="absolute inset-0"
+          variants={{
+            initial: { y: "100%" },
+            hovered: {
+              y: 0,
+            },
+          }}
+          transition={{ delay: 0.2, duration: 0.3 }}
+        >
+          {children}
+        </motion.div>
+      </Link>
+    </motion.div>
   );
 };
