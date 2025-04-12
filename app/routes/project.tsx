@@ -1,3 +1,7 @@
+import { useScroll } from "motion/react";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+
 export default function Project() {
   const datas = [
     {
@@ -26,16 +30,23 @@ export default function Project() {
     },
   ];
 
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "start start"],
+  });
+
   return (
-    <div>
+    <div ref={ref} className="mt-5">
       {datas.map((data, index) => (
-        <div
-          className="h-[30em] w-full flex justify-center items-center rounded-3xl bg-center bg-cover"
+        <motion.div
+          className="h-[30rem] w-full flex justify-center items-center rounded-3xl bg-center bg-cover sticky top-10"
           style={{
             backgroundImage: `url(${data.img})`,
+            opacity: scrollYProgress,
           }}
         >
-          <div className="bg-black/35 w-full h-full flex justify-center items-center rounded-3xl relative">
+          <div className="bg-black/35 w-full h-full flex justify-center items-center rounded-3xl relative top-[-10%   ] ">
             <h1 className="text-white text-9xl font-bold">{data.title}</h1>
             <div className="absolute top-5 left-0 flex  justify-between items-center w-full px-8 ">
               <h1 className="text-base  border border-white rounded-xl p-1 uppercase">
@@ -50,7 +61,7 @@ export default function Project() {
               </a>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

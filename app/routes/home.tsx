@@ -1,6 +1,7 @@
 import Banner from "~/components/banner";
 import type { Route } from "./+types/home";
 import Project from "./project";
+import Award from "./award";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -17,6 +18,7 @@ export default function Home() {
     <div className=" mx-auto px-[1.5rem]">
       <Banner />
       <Project />
+      <Award />
     </div>
   );
 }
