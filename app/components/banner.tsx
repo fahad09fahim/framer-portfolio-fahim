@@ -10,7 +10,7 @@ export default function Banner() {
             ease: "linear",
           }}
           animate={{ scale: 1, y: -15 }}
-          className=" w-full h-[88vh]  bg-[url('https://i.ibb.co/wFR4DD18/Whats-App-Image-2025-04-06-at-4-03-02-PM.jpg')]  bg-cover  bg-center bg-no-repeat "
+          className=" w-full min-h-[88vh]  bg-[url('https://i.ibb.co/fmyqfZr/aigenbg.png')] bg-center bg-no-repeat "
         ></motion.div>
       </AnimatePresence>
       <div className="">

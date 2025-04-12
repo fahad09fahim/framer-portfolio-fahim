@@ -60,7 +60,7 @@ export default function NavBar() {
         </div>
         <div>
           <button className="btn rounded-4xl bg-lime-500 bg-opacity-80 text-black px-4 py-2 ">
-            Contact Me
+            <FlipLinks>Contact Me</FlipLinks>
           </button>
         </div>
       </motion.div>
@@ -70,18 +70,19 @@ export default function NavBar() {
 
 type FlipLinksProps = {
   children: React.ReactNode;
-  to: string;
+  to?: string;
   onClick?: () => void;
+  className?: string;
 };
 
-const FlipLinks = ({ children, to, onClick }: FlipLinksProps) => {
+const FlipLinks = ({ children, to, onClick, className }: FlipLinksProps) => {
   return (
     <motion.div
       initial="initial"
       whileHover="hovered"
       className="relative block overflow-hidden whitespace-nowrap "
     >
-      <Link to={to} onClick={onClick}>
+      <Link to={to} onClick={onClick} className={className}>
         <motion.div
           variants={{
             initial: { y: 0 },
